@@ -26,4 +26,4 @@ branding:
 runs:
   using: 'docker'
   image: 'docker://syncmaven/syncmaven'
-  entrypoint: 'action.sh'
+  entrypoint: './action.sh'
