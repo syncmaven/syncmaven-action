@@ -22,5 +22,4 @@ branding:
   color: 'orange'
 runs:
   using: 'docker'
-  image: 'docker://syncmaven/syncmaven'
-  entrypoint: '/syncmaven/action.sh'
+  image: 'Dockerfile'
