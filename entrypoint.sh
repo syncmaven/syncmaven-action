@@ -4,7 +4,8 @@ env
 env | grep SYNCMAVEN_
 
 SYNC_ARGS=""
-PROJECT_DIR="$GITHUB_WORKSPACE"
+#PROJECT_DIR="$GITHUB_WORKSPACE"
+PROJECT_DIR="/home/runner/work/syncmaven-example/syncmaven-example"
 
 if [ ! -z $INPUT_DIR ]; then
   PROJECT_DIR="$PROJECT_DIR/$INPUT_DIR"
