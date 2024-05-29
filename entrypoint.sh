@@ -3,11 +3,10 @@
 env | grep SYNCMAVEN_
 
 SYNC_ARGS=""
+PROJECT_DIR=$GITHUB_WORKSPACE
 
 if [ ! -z $INPUT_DIR ]; then
-  SYNC_ARGS="$SYNC_ARGS --project-dir $GITHUB_WORKSPACE/$INPUT_DIR"
-else
-  SYNC_ARGS="$SYNC_ARGS --project-dir $GITHUB_WORKSPACE"
+  PROJECT_DIR="$PROJECT_DIR/$INPUT_DIR"
 fi
 
 if [ ! -z $INPUT_SELECT ]; then
@@ -28,4 +27,4 @@ fi
 
 export RPC_PORT=8081
 
-docker run -e RPC_PORT -p 8081:8081 -v /var/run/docker.sock:/var/run/docker.sock -v $GITHUB_WORKSPACE:/project syncmaven/syncmaven:latest sync $SYNC_ARGS
+docker run -e RPC_PORT -p 8081:8081 -v /var/run/docker.sock:/var/run/docker.sock -v $PROJECT_DIR:/project syncmaven/syncmaven:latest sync $SYNC_ARGS
