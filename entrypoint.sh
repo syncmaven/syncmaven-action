@@ -6,8 +6,6 @@ SYNC_ARGS=""
 
 REPOSITORY=$(echo "${RUNNER_WORKSPACE##*/}")
 
-echo "REPOSITORY: $REPOSITORY"
-
 PROJECT_DIR="$RUNNER_WORKSPACE/$REPOSITORY"
 
 if [ ! -z $INPUT_DIR ]; then
@@ -30,12 +28,6 @@ if [ ! -z $INPUT_FULL ]; then
   SYNC_ARGS="$SYNC_ARGS --full-refresh"
 fi
 
-echo "PROJECT_DIR: $PROJECT_DIR"
-
-ls -la $PROJECT_DIR
-
 export RPC_PORT=8081
 
-set -x
-
-docker run -e RPC_PORT -p 8081:8081 -v "$PROJECT_DIR":"/project" -v "/var/run/docker.sock":"/var/run/docker.sock" syncmaven/syncmaven:latest sync $SYNC_ARGS
+docker run -e RPC_PORT -p 8081:8081 -v $PROJECT_DIR:/project -v /var/run/docker.sock:/var/run/docker.sock syncmaven/syncmaven:latest sync $SYNC_ARGS
