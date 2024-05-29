@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export > .env
+awk 'BEGIN{for(v in ENVIRON) print v}' > .env
 
 SYNC_ARGS=""
 
