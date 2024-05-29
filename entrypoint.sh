@@ -4,7 +4,7 @@ env | grep SYNCMAVEN_
 
 SYNC_ARGS=""
 
-REPOSITORY=$(echo "${RUNNER_WORKSPACE##*/ }")
+REPOSITORY=$(echo "${RUNNER_WORKSPACE##*/}")
 
 echo "REPOSITORY: $REPOSITORY"
 
