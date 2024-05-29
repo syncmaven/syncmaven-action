@@ -5,8 +5,6 @@ env | grep SYNCMAVEN_
 SYNC_ARGS=""
 PROJECT_DIR="$GITHUB_WORKSPACE"
 
-echo "PROJECT_DIR: $PROJECT_DIR"
-
 if [ ! -z $INPUT_DIR ]; then
   PROJECT_DIR="$PROJECT_DIR/$INPUT_DIR"
 fi
@@ -26,6 +24,8 @@ fi
 if [ ! -z $INPUT_FULL ]; then
   SYNC_ARGS="$SYNC_ARGS --full-refresh"
 fi
+
+echo "PROJECT_DIR: $PROJECT_DIR"
 
 export RPC_PORT=8081
 
