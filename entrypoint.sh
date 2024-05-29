@@ -31,4 +31,6 @@ ls -la $PROJECT_DIR
 
 export RPC_PORT=8081
 
+set -x
+
 docker run -e RPC_PORT -p 8081:8081 -v /var/run/docker.sock:/var/run/docker.sock -v $PROJECT_DIR:/project syncmaven/syncmaven:latest sync $SYNC_ARGS
