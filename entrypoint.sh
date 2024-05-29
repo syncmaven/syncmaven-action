@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
-env
 env | grep SYNCMAVEN_
 
 SYNC_ARGS=""
-#PROJECT_DIR="$GITHUB_WORKSPACE"
-PROJECT_DIR="/home/runner/work/syncmaven-example/syncmaven-example"
+
+REPOSITORY=$(echo "${RUNNER_WORKSPACE##*/ }")
+
+echo "REPOSITORY: $REPOSITORY"
+
+PROJECT_DIR="$RUNNER_WORKSPACE/$REPOSITORY"
 
 if [ ! -z $INPUT_DIR ]; then
   PROJECT_DIR="$PROJECT_DIR/$INPUT_DIR"
