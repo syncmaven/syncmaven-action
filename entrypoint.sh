@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-env | grep SYNCMAVEN_
+export > .env
 
 SYNC_ARGS=""
 
@@ -30,4 +30,4 @@ fi
 
 export RPC_PORT=8081
 
-docker run -e RPC_PORT -p 8081:8081 -v $PROJECT_DIR:/project -v /var/run/docker.sock:/var/run/docker.sock syncmaven/syncmaven:latest sync $SYNC_ARGS
+docker run -e RPC_PORT --env-file .env -p 8081:8081 -v $PROJECT_DIR:/project -v /var/run/docker.sock:/var/run/docker.sock syncmaven/syncmaven:latest sync $SYNC_ARGS
