@@ -97,7 +97,6 @@ main() {
 
   if [ "$DEBUG_MODE" = true ]; then
     echo "Docker command:" "${DOCKER_CMD[@]}"
-    exit 0
   fi
 
   # Execute the docker command
