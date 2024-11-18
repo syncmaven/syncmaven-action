@@ -14,6 +14,18 @@ function print_env_vars {
   done
 }
 
+# gets env var value, supports names with '-' and '.' characters
+function getenv() {
+  local var_name=$1
+  local default_value=$2
+  local value=$(printenv | grep $var_name)
+  if [ -z "$value" ]; then
+    echo $default_value
+  else
+    echo $value | cut -d'=' -f2
+  fi
+}
+
 main() {
   # Save all environment variables to .env file
   awk 'BEGIN{for(v in ENVIRON) print v}' > .env
@@ -52,7 +64,7 @@ main() {
   )
 
   for VAR in "${!ARG_MAPPING[@]}"; do
-    VALUE="${!VAR}"
+    VALUE=$(getenv "$VAR")
     if [ -n "$VALUE" ]; then
       ARG="${ARG_MAPPING[$VAR]}"
       VALUE="$(escape "$VALUE")"
@@ -65,7 +77,8 @@ main() {
     fi
   done
 
-  SYNCMAVEN_VERSION="${INPUT_SYNCMAVEN-VERSION:-latest}"
+  SYNCMAVEN_VERSION=$(getenv "INPUT_SYNCMAVEN-VERSION" "latest")
+
 
   export RPC_PORT=8081
 
@@ -84,6 +97,7 @@ main() {
 
   if [ "$DEBUG_MODE" = true ]; then
     echo "Docker command:" "${DOCKER_CMD[@]}"
+    exit 0
   fi
 
   # Execute the docker command

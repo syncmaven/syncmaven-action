@@ -25,8 +25,8 @@ jobs:
           model: '{ "query": "${{ env.SQL_QUERY }}", "cursor": "updated_at" }'
           datasource: ${{ secrets.DATASOURCE }}
           credentials: '{ "apiKey": "${{ secrets.RESEND_API_KEY }}" }'
-          sync_id: 'resend'
+          sync-id: 'resend'
           state: ${{ secrets.STATE_DB }}
           package-type: docker
           package: syncmaven/resend
-          syncmaven_version: 'canary-152.f3f553f'
+          syncmaven-version: 'canary-152.f3f553f'
