@@ -17,6 +17,30 @@ inputs:
   full:
     description: 'If sync supports incremental mode, this option will force full refresh. Will apply to all selected syncs'
     required: false
+  syncmaven-version:
+    description: 'Syncmaven version'
+    required: false
+    default: 'latest'
+  model:
+    description: 'If project dir is not specified, you can specify the model query in this field. Equivalent of -m option in syncmaven cli'
+    required: false
+  datasource:
+    description: 'If project dir is not specified, you can specify the datasource in this field. Equivalent of --datasource option in syncmaven  cli'
+    required: false
+  credentials:
+    description: 'If project dir is not specified, you can specify the credentials of a destination here. Equivalent of -c option in syncmaven  cli'
+    required: false
+  sync-id:
+    description: 'If project dir is not specified, you can specify the sync id here. The sync id is used as a key for storing checkpoints in the state database. The default value is Equivalent of --sync-id option in syncmaven cli. '
+    required: false
+  package:
+    description: 'If project dir is not specified, you can specify package. Equivalent of --package option in syncmaven cli'
+    required: false
+  package-type:
+    description: 'If project dir is not specified, you can specify package type (npm or docker). Equivalent of --package option in syncmaven cli'
+    required: false
+    default: 'docker'
+
 branding:
   icon: 'refresh-cw'
   color: 'orange'

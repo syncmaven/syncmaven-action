@@ -1,0 +1,32 @@
+# This file is used to test the action locally
+# It syncs PostgreSQL to Resend. To run locally:
+#  - Create a .secrets file with the values referenced below
+#  - Run `act -W . --container-architecture linux/arm64 -j test`
+
+name: Test Syncmaven Action
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      SQL_QUERY: ${{ secrets.SQL_QUERY }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Syncmaven Action
+        uses: ./
+        with:
+          debug: true
+          model: '{ "query": "${{ env.SQL_QUERY }}", "cursor": "updated_at" }'
+          datasource: ${{ secrets.DATASOURCE }}
+          credentials: '{ "apiKey": "${{ secrets.RESEND_API_KEY }}" }'
+          sync_id: 'resend'
+          state: ${{ secrets.STATE_DB }}
+          package-type: docker
+          package: syncmaven/resend
+          syncmaven_version: 'canary-152.f3f553f'
