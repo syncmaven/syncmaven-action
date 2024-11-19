@@ -7,15 +7,8 @@ escape() {
   printf '%q' "$input"
 }
 
-#unlike printenv, this function will print multi-line values correctly
-function print_env_vars {
-  for var in $(compgen -e); do
-    printf '%s=%q\n' "$var" "${!var}"
-  done
-}
-
-# gets env var value, supports names with '-' and '.' characters
-function getenv() {
+# Gets env var value, supports names with '-' and '.' characters. Like VAR-XXX
+getenv() {
   local var_name=$1
   local default_value=$2
   local value=$(printenv | grep $var_name)
@@ -24,6 +17,16 @@ function getenv() {
   else
     echo $value | cut -d'=' -f2
   fi
+}
+
+#unlike printenv, this function will print multi-line values correctly
+print_env_vars() {
+  local name
+  for name in $(env | cut -d= -f1); do
+    # Retrieve and print the value using eval
+    local value=$(eval echo \$$name)
+    echo "$name=$value"
+  done
 }
 
 main() {
