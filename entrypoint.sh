@@ -11,11 +11,11 @@ escape() {
 getenv() {
   local var_name=$1
   local default_value=$2
-  local value=$(printenv | grep $var_name)
+  local value=$(printenv | grep -E "^${var_name}=")
   if [ -z "$value" ]; then
     echo $default_value
   else
-    echo $value | cut -d'=' -f2
+    echo "${value#*=}"
   fi
 }
 
