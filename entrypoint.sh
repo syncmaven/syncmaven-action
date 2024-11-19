@@ -24,7 +24,7 @@ print_env_vars() {
   local name
   for name in $(env | cut -d= -f1); do
     # Retrieve and print the value using eval
-    local value=$(eval echo \$$name)
+    local value=$(getenv $name)
     echo "$name=$value"
   done
 }
@@ -70,7 +70,7 @@ main() {
     VALUE=$(getenv "$VAR")
     if [ -n "$VALUE" ]; then
       ARG="${ARG_MAPPING[$VAR]}"
-      VALUE="$(escape "$VALUE")"
+      #VALUE="$(escape "$VALUE")" - let's try without escaping
       # For flags without values (e.g., --full-refresh), don't add the value
       if [ "$ARG" == "--full-refresh" ]; then
         SYNC_ARGS+=("$ARG")
