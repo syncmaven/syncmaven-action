@@ -17,6 +17,9 @@ inputs:
   full:
     description: 'If sync supports incremental mode, this option will force full refresh. Will apply to all selected syncs'
     required: false
+  retry:
+    description: 'Retry count on failure'
+    required: false
 branding:
   icon: 'refresh-cw'
   color: 'orange'
